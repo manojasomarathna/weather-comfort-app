@@ -5,12 +5,26 @@ export default function Login() {
 
   return (
     <div className="login-page">
+      <div className="login-bg">
+        <span>🌤</span><span>⛅</span><span>🌦</span>
+        <span>🌍</span><span>🌡</span><span>💨</span>
+        <span>🌤</span><span>⛅</span><span>🌈</span>
+      </div>
       <div className="login-card">
-        <h1>🌤 Weather Comfort</h1>
-        <p>View real-time comfort rankings for cities worldwide.</p>
-        <button className="btn-primary btn-large" onClick={() => loginWithRedirect()}>
-          Sign In to Continue
+        <div className="login-icon">🌤</div>
+        <h1>Weather Comfort</h1>
+        <p className="login-subtitle">Real-time comfort rankings for cities worldwide</p>
+
+        <div className="login-features">
+          <div className="login-feature"><span>🏙</span> 12 Global Cities</div>
+          <div className="login-feature"><span>📊</span> Comfort Index Score</div>
+          <div className="login-feature"><span>🌡</span> Live Weather Data</div>
+        </div>
+
+        <button className="btn-primary btn-large login-btn" onClick={() => loginWithRedirect()}>
+          Sign In to Continue →
         </button>
+        <p className="login-note">Secure login powered by Auth0</p>
       </div>
     </div>
   )
