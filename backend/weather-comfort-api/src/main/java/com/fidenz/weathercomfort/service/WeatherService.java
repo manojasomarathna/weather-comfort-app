@@ -23,7 +23,7 @@ public class WeatherService {
     @Value("${openweather.api.key}")
     private String apiKey;
 
-    @Value("${openweather.api.url}")
+    @Value("${openweather.api.url:https://api.openweathermap.org/data/2.5/weather}")
     private String apiUrl;
 
     private final ComfortIndexService comfortIndexService;
