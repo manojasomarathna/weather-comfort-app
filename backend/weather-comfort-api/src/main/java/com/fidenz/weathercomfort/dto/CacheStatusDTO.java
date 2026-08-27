@@ -1,12 +1,17 @@
 package com.fidenz.weathercomfort.dto;
 
-import lombok.Builder;
-import lombok.Data;
-
-@Data
-@Builder
 public class CacheStatusDTO {
     private String cacheName;
     private long estimatedSize;
-    private String status; // HIT or MISS
+    private String status;
+
+    public CacheStatusDTO(String cacheName, long estimatedSize, String status) {
+        this.cacheName = cacheName;
+        this.estimatedSize = estimatedSize;
+        this.status = status;
+    }
+
+    public String getCacheName() { return cacheName; }
+    public long getEstimatedSize() { return estimatedSize; }
+    public String getStatus() { return status; }
 }

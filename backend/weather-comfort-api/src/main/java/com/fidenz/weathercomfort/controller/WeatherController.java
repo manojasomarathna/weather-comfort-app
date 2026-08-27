@@ -3,7 +3,6 @@ package com.fidenz.weathercomfort.controller;
 import com.fidenz.weathercomfort.dto.CacheStatusDTO;
 import com.fidenz.weathercomfort.dto.CityWeatherDTO;
 import com.fidenz.weathercomfort.service.WeatherService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCache;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +14,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/weather")
-@RequiredArgsConstructor
 public class WeatherController {
 
     private final WeatherService weatherService;
     private final CacheManager cacheManager;
+
+    public WeatherController(WeatherService weatherService, CacheManager cacheManager) {
+        this.weatherService = weatherService;
+        this.cacheManager = cacheManager;
+    }
 
     @GetMapping("/rankings")
     public ResponseEntity<List<CityWeatherDTO>> getRankings() {
@@ -35,11 +38,7 @@ public class WeatherController {
                     if (cache instanceof CaffeineCache caffeineCache) {
                         size = caffeineCache.getNativeCache().estimatedSize();
                     }
-                    return CacheStatusDTO.builder()
-                            .cacheName(name)
-                            .estimatedSize(size)
-                            .status(size > 0 ? "HIT" : "MISS")
-                            .build();
+                    return new CacheStatusDTO(name, size, size > 0 ? "HIT" : "MISS");
                 })
                 .toList();
         return ResponseEntity.ok(statuses);
