@@ -5,11 +5,16 @@ const api = axios.create({
 })
 
 export const fetchRankings = async (getAccessTokenSilently) => {
-  const token = await getAccessTokenSilently()
-  const { data } = await api.get('/api/weather/rankings', {
-    headers: { Authorization: `Bearer ${token}` },
-  })
-  return data
+  try {
+    const token = await getAccessTokenSilently()
+    const { data } = await api.get('/api/weather/rankings', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    return data
+  } catch {
+    const { data } = await api.get('/api/weather/rankings')
+    return data
+  }
 }
 
 export const fetchCacheStatus = async () => {
