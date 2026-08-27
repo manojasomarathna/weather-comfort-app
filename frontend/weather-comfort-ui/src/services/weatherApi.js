@@ -5,9 +5,7 @@ const api = axios.create({
 })
 
 export const fetchRankings = async (getAccessTokenSilently) => {
-  const token = await getAccessTokenSilently({
-    authorizationParams: { audience: import.meta.env.VITE_AUTH0_AUDIENCE },
-  })
+  const token = await getAccessTokenSilently()
   const { data } = await api.get('/api/weather/rankings', {
     headers: { Authorization: `Bearer ${token}` },
   })
