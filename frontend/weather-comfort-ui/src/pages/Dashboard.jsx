@@ -15,9 +15,10 @@ export default function Dashboard() {
   const [sortBy, setSortBy] = useState('rank')
 
   useEffect(() => {
+    console.log('[Dashboard] fetching rankings...')
     fetchRankings(getAccessTokenSilently)
-      .then(data => { setCities(data); setFiltered(data) })
-      .catch(() => setError('Failed to load weather data.'))
+      .then(data => { console.log('[Dashboard] data:', data); setCities(data); setFiltered(data) })
+      .catch(err => { console.error('[Dashboard] error:', err); setError('Failed to load weather data.') })
       .finally(() => setLoading(false))
   }, [getAccessTokenSilently])
 

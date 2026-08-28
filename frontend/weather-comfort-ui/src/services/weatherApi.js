@@ -7,11 +7,13 @@ const api = axios.create({
 export const fetchRankings = async (getAccessTokenSilently) => {
   try {
     const token = await getAccessTokenSilently()
+    console.log('[weatherApi] token acquired:', token?.substring(0, 20) + '...')
     const { data } = await api.get('/api/weather/rankings', {
       headers: { Authorization: `Bearer ${token}` },
     })
     return data
-  } catch {
+  } catch (err) {
+    console.error('[weatherApi] token/request failed:', err)
     const { data } = await api.get('/api/weather/rankings')
     return data
   }
